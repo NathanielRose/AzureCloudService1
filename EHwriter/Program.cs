@@ -21,7 +21,9 @@ static async Task SendingRandomMessages()
     {
         try
         {
+            //Creates message from GUID time byte
             var message = Guid.NewGuid().ToString();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("{0} > Sending message: {1}", DateTime.Now.ToString(), message);
             await eventHubClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(message)));
         }
