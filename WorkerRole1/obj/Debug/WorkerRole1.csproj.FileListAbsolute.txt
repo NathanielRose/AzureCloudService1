@@ -60,3 +60,5 @@ c:\users\naros\documents\visual studio 2013\Projects\AzureCloudService1\WorkerRo
 c:\users\naros\documents\visual studio 2013\Projects\AzureCloudService1\WorkerRole1\obj\Debug\WorkerRole1.csprojResolveAssemblyReference.cache
 c:\users\naros\documents\visual studio 2013\Projects\AzureCloudService1\WorkerRole1\obj\Debug\WorkerRole1.dll
 c:\users\naros\documents\visual studio 2013\Projects\AzureCloudService1\WorkerRole1\obj\Debug\WorkerRole1.pdb
+C:\Users\naros\documents\visual studio 2013\Projects\AzureCloudService1\WorkerRole1\obj\Debug\WorkerRole1.csprojFakesResolveAssemblyReference.cache
+C:\Users\naros\documents\visual studio 2013\Projects\AzureCloudService1\WorkerRole1\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll

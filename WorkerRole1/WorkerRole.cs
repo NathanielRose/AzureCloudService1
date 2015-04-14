@@ -20,6 +20,7 @@ namespace WorkerRole1
         //*******************************
         // Messages & Formats
         //*******************************
+        
         private const string RoleEnvironmentSettingFormat = "Configuration Setting [{0}] = [{1}].";
         private const string RoleEnvironmentConfigurationSettingChangedFormat = "The setting [{0}] is changed: new value = [{1}].";
         private const string RoleEnvironmentConfigurationSettingChangingFormat = "The setting [{0}] is changing: old value = [{1}].";
@@ -42,6 +43,7 @@ namespace WorkerRole1
         private const string ServiceBusConnectionStringSetting = "Endpoint=sb://iotnate.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=+XRBh06RRMu0/Ew/DSEtdOvOXm7fk9401S/AtmAMEAs=";
         private const string EventHubNameSetting = "ioteventh";
         private const string ConsumerGroupNameSetting = "trolls";
+        private const string eventHubConnectionString = "Endpoint=sb://iotnate.servicebus.windows.net/;SharedAccessKeyName=Admin;SharedAccessKey=IbyM51i0m8UzE2x0FTMlw76cMhl+VAwyUtXhZynfTxw=";
         #endregion
 
         #region Private Fields
@@ -51,10 +53,15 @@ namespace WorkerRole1
         private string storageAccountConnectionString;
         private string serviceBusConnectionString;
         private EventProcessorHost eventProcessorHost;
+        
         #endregion
 
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
+
+        QueueClient queue;
+
+        
 
         public override void Run()
         {
@@ -87,9 +94,13 @@ namespace WorkerRole1
             string eventHubName = "ioteventh";
             
             EventHubClient client = EventHubClient.CreateFromConnectionString(serviceBus, eventHubName);
+            
             Trace.TraceInformation("Consumer group is: " + client.GetConsumerGroup("trolls"));
 
-             _host = new EventProcessorHost("singleworker", eventHubName, client.GetDefaultConsumerGroup().GroupName, serviceBus, storage);
+             _host = new EventProcessorHost("singleworker", eventHubName, 
+                 client.GetDefaultConsumerGroup().GroupName, serviceBus, storage);
+
+             Trace.TraceInformation("Created Event Processor Host!");
 
 
             return result;
@@ -99,7 +110,10 @@ namespace WorkerRole1
        
         public override void OnStop()
         {
+            
             Trace.TraceInformation("WorkerRole1 is stopping");
+
+            _host.UnregisterEventProcessorAsync().Wait();
 
             this.cancellationTokenSource.Cancel();
             this.runCompleteEvent.WaitOne();
@@ -112,10 +126,16 @@ namespace WorkerRole1
         private async Task RunAsync(CancellationToken cancellationToken)
         {
             // TODO: Replace the following with your own logic.
-            while (!cancellationToken.IsCancellationRequested)
+            await _host.RegisterEventProcessorAsync<EventProcessor>();
+            
+           while (!cancellationToken.IsCancellationRequested)
             {
+               
                 Trace.TraceInformation("Working");
-                await Task.Delay(1000);
+                Trace.TraceInformation("This is what is in the EH Message", _host.ToString());
+
+         
+               await Task.Delay(1000);
             }
         }
     }

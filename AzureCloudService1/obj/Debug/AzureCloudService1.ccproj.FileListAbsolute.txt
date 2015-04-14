@@ -50,3 +50,4 @@ C:\Users\naros\documents\visual studio 2013\Projects\AzureCloudService1\AzureClo
 C:\Users\naros\documents\visual studio 2013\Projects\AzureCloudService1\AzureCloudService1\obj\Debug\WorkerRole1\zh-Hant\Microsoft.Data.OData.resources.dll
 C:\Users\naros\documents\visual studio 2013\Projects\AzureCloudService1\AzureCloudService1\obj\Debug\WorkerRole1\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\Users\naros\documents\visual studio 2013\Projects\AzureCloudService1\AzureCloudService1\obj\Debug\WorkerRole1\zh-Hant\System.Spatial.resources.dll
+C:\Users\naros\documents\visual studio 2013\Projects\AzureCloudService1\AzureCloudService1\obj\Debug\WorkerRole1\Microsoft.QualityTools.Testing.Fakes.dll
