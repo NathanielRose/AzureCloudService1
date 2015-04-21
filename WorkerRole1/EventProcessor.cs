@@ -51,25 +51,27 @@ namespace WorkerRole1
                     string data = System.Text.Encoding.Unicode.GetString(eventData.GetBytes());
 
                     //string data = Encoding.UTF8.GetString(eventData.GetBytes());
-
-                    try
+                    if (data != null)
                     {
-                        var json = JObject.Parse(data);
-                        string text = json["Message"].ToString();
-                        string agent = json["BrowserInfo"].ToString();
-
-                        if (queue != null)
+                        try
                         {
-                            await queue.SendAsync(new BrokeredMessage((agent + "##" + text)));
+                            var json = JObject.Parse(data);
+                            string text = json["Message"].ToString();
+                            string agent = json["BrowserInfo"].ToString();
 
-                            Trace.TraceInformation("Added to queue:" + agent);
+                            if (queue != null)
+                            {
+                                await queue.SendAsync(new BrokeredMessage((agent + "##" + text)));
+
+                                Trace.TraceInformation("Added to queue:" + agent);
+                            }
+
                         }
 
-                    }
-
-                    catch (Exception except)
-                    {
-                        Console.WriteLine(except.Message);
+                        catch (Exception except)
+                        {
+                            Console.WriteLine(except.Message);
+                        }
                     }
 
                     Console.WriteLine(string.Format("Message received.  Partition: '{0}', Data: '{1}'",

@@ -132,7 +132,7 @@ namespace WorkerRole1
             {
                
                 Trace.TraceInformation("Working");
-                Trace.TraceInformation("This is what is in the EH Message", _host.ToString());
+                Console.WriteLine("This is what is in the EH Message", _host.ToString());
 
          
                await Task.Delay(1000);
