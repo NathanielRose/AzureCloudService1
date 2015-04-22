@@ -48,7 +48,7 @@ namespace WorkerRole1
 
                     string key = eventData.PartitionKey;
 
-                    string data = System.Text.Encoding.Unicode.GetString(eventData.GetBytes());
+                    string data = System.Text.Encoding.UTF8.GetString(eventData.GetBytes());
 
                     //string data = Encoding.UTF8.GetString(eventData.GetBytes());
                     if (data != null)
