@@ -11,17 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHwriter", "EHwriter\EHwrit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonUtils", "..\..\..\..\Desktop\TrollBridge\IoTProject\CommonUtils\CommonUtils.csproj", "{86815733-716B-4674-BA88-C08813BBC0B9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{9966161C-F584-4EBF-A703-5A73D8FF7C1C}"
+	ProjectSection(SolutionItems) = preProject
+		IoTDBMerge.sql = IoTDBMerge.sql
+	EndProjectSection
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 1
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://codeisgood.visualstudio.com/defaultcollection
-		SccProjectUniqueName0 = ..\\..\\..\\..\\Desktop\\TrollBridge\\IoTProject\\CommonUtils\\CommonUtils.csproj
-		SccProjectName0 = $/TrollBridge/IoTProject/CommonUtils
-		SccAuxPath0 = https://codeisgood.visualstudio.com/defaultcollection
-		SccLocalPath0 = ..\\..\\..\\..\\Desktop\\TrollBridge\\IoTProject\\CommonUtils
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

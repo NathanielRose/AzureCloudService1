@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Configuration;
 using System.Threading.Tasks;
 using Microsoft.ServiceBus.Messaging;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json.Linq;
 
 namespace WorkerRole1
@@ -13,6 +16,8 @@ namespace WorkerRole1
   
         public class EventProcessor : IEventProcessor
         {
+            private CloudBlobContainer blobContainer;
+
             Stopwatch checkpointStopWatch;
             PartitionContext partitionContext;
 
@@ -20,6 +25,7 @@ namespace WorkerRole1
 
             public EventProcessor()
             {
+                
                 queue = QueueClient.CreateFromConnectionString("Endpoint=sb://iotnate.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=+XRBh06RRMu0/Ew/DSEtdOvOXm7fk9401S/AtmAMEAs=","IoTq");
             }
 
@@ -46,6 +52,8 @@ namespace WorkerRole1
                 {
                     Console.WriteLine("Processing Event Hub Data");
 
+                    
+
                     string key = eventData.PartitionKey;
 
                     string data = System.Text.Encoding.UTF8.GetString(eventData.GetBytes());
@@ -53,6 +61,9 @@ namespace WorkerRole1
                     //string data = Encoding.UTF8.GetString(eventData.GetBytes());
                     if (data != null)
                     {
+                        CloudBlockBlob inputBlob;
+                        string fileName;
+                        CloudBlockBlob outputBlob;
                         try
                         {
                             var json = JObject.Parse(data);

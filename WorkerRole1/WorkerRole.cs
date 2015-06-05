@@ -9,7 +9,10 @@ using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.ServiceBus.Messaging;
+
 
 
 namespace WorkerRole1
@@ -17,23 +20,7 @@ namespace WorkerRole1
     public class WorkerRole : RoleEntryPoint
     {
         #region Private Constants
-        //*******************************
-        // Messages & Formats
-        //*******************************
         
-        private const string RoleEnvironmentSettingFormat = "Configuration Setting [{0}] = [{1}].";
-        private const string RoleEnvironmentConfigurationSettingChangedFormat = "The setting [{0}] is changed: new value = [{1}].";
-        private const string RoleEnvironmentConfigurationSettingChangingFormat = "The setting [{0}] is changing: old value = [{1}].";
-        private const string RoleEnvironmentTopologyChangedFormat = "The  topology for the [{0}] role is changed.";
-        private const string RoleEnvironmentTopologyChangingFormat = "The  topology for the [{0}] role is changing.";
-        private const string RoleInstanceCountFormat = "[Role {0}] instance count = [{1}].";
-        private const string RoleInstanceEndpointCountFormat = "[Role {0}] instance endpoints count = [{1}].";
-        private const string RoleInstanceEndpointFormat = "[Role {0}] instance endpoint [{1}]: protocol = [{2}] address = [{3}] port = [{4}].";
-        private const string RoleInstanceIdFormat = "[Role {0}] instance Id = [{1}].";
-        private const string RoleInstanceStatusFormat = "[Role {0}] instance Id = [{1}] Status = [{2}].";
-        private const string Unknown = "Unknown";
-        private const string RegisteringEventProcessor = "Registering Event Processor [EventProcessor]... ";
-        private const string EventProcessorRegistered = "Event Processor [EventProcessor] successfully registered. ";
 
         //*******************************
         // Settings
@@ -92,7 +79,20 @@ namespace WorkerRole1
             string storage = "DefaultEndpointsProtocol=http;AccountName=iotspace;AccountKey=JvDBulZEWQ4ep9jOkZZgucti7OPBUQyh82iMWUNxBWURzT57AQtZ6HGBt+9dAGqfCjL1zMNnpfpffOp7qqDI9Q==";
             string serviceBus = "Endpoint=sb://iotnate.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=+XRBh06RRMu0/Ew/DSEtdOvOXm7fk9401S/AtmAMEAs=";
             string eventHubName = "ioteventh";
-            
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageAccountConnectionString"));
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference("adftest");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("emp.txt");
+
+
+            using (var fileStream = System.IO.File.OpenRead(@"C:\Users\naros\Desktop\emp.txt"))
+            {
+
+                blockBlob.UploadFromStream(fileStream);
+            }
+
+
             EventHubClient client = EventHubClient.CreateFromConnectionString(serviceBus, eventHubName);
             
             Trace.TraceInformation("Consumer group is: " + client.GetConsumerGroup("trolls"));

@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-//using CommonUtils;
+
 
 namespace DataType.Live
 {
@@ -21,7 +21,8 @@ namespace DataType.Live
     /// 
     public class LiveDataDataHelper
     {
-        /*public static List<LiveData> GetUnsentLiveData(string sqlConnectionString)
+        /*
+        public static List<LiveData> GetUnsentLiveData(string sqlConnectionString)
         {
             List<LiveData> dataList = new List<LiveData>();
 
@@ -42,12 +43,6 @@ namespace DataType.Live
                        // LiveData rd = new LiveData();
                         rd.TagId = sdr.GetInt32(0);
                         rd.MachineSection = sdr.GetString(1);
-                        rd.Description = sdr.GetString(2);
-                        rd.TagName = sdr.GetString(3);
-                        rd.TagValue = sdr.GetFloat(4);
-                        rd.TagStatus = sdr.GetInt32(5);
-                        rd.TimeStamp = sdr.GetDateTime(6);
-                        rd.Machine = sdr.GetString(7);
                         dataList.Add(rd);
                     }
                     sdr.Close();
@@ -66,7 +61,7 @@ namespace DataType.Live
             
 
             // Add rows
-            /*foreach (LiveData ld in dataList)
+            foreach (LiveData ld in dataList)
             {
                 dt.Rows.Add(ld.TagId, ld.Message, ld.Description, ld.TagName, ld.TagValue, ld.TagStatus, ld.TimeStamp, ld.Machine);
             }

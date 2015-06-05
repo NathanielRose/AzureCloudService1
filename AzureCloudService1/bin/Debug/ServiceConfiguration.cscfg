@@ -13,7 +13,7 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="SqlDatabaseConnectionString" value="[AZURE SQL DATABASE CONNECTION STRING]" />
-      <Setting name="StorageAccountConnectionString" value="[STORAGE ACCOUNT CONNECTION STRING]" />
+      <Setting name="StorageAccountConnectionString" value="DefaultEndpointsProtocol=https;AccountName=adftestnaterose;AccountKey=+HNKCB6vEH6jFztebsSFJiEmoedJythp5zM2Xy0VOVopu4NBAegnFRsOtMsMo3S3ZX2xsqx943yyB6imGtvx8Q==" />
       <Setting name="ServiceBusConnectionString" value="[SERVICE BUS CONNECTION STRING]" />
       <Setting name="EventHubName" value="[EVENT HUB NAME]" />
       <Setting name="ConsumerGroupName" value="[CONSUMER GROUP NAME]" />

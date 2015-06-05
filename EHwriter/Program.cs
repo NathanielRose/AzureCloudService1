@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure;
 
@@ -16,6 +17,8 @@ namespace EHwriter
         
 static async Task SendingRandomMessages()
 {
+    PerformanceCounter cpuCounter;
+    
     var eventHubClient = EventHubClient.CreateFromConnectionString(connectionString, eventHubName);
     while (true)
     {
@@ -24,8 +27,14 @@ static async Task SendingRandomMessages()
             //Creates message from GUID time byte
             var message = Guid.NewGuid().ToString();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("{0} > Sending message: {1}", DateTime.Now.ToString(), message);
+            Console.WriteLine("Timestamp: {0} > Current Temperature: {1}", DateTime.Now.ToString(), message);
             await eventHubClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(message)));
+            string localmsg = "" + DateTime.Now.ToString() + "," + message;
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\naros\Desktop\emp.txt",true))
+            {
+                file.WriteLine(localmsg);
+            }
+            
         }
         catch (Exception exception)
         {
@@ -45,5 +54,23 @@ static async Task SendingRandomMessages()
             Console.ReadLine();
             SendingRandomMessages().Wait();
         }
+
+         public object getCPUCounter()
+    {
+
+        PerformanceCounter cpuCounter = new PerformanceCounter();
+        cpuCounter.CategoryName = "Processor";
+        cpuCounter.CounterName = "% Processor Time";
+        cpuCounter.InstanceName = "_Total";
+
+                     // will always start at 0
+        dynamic firstValue = cpuCounter.NextValue();
+        System.Threading.Thread.Sleep(1000);
+                    // now matches task manager reading
+        dynamic secondValue = cpuCounter.NextValue();
+
+        return secondValue;
+
+    }
     }
 }
