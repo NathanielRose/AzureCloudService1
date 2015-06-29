@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure;
+using System.Net;
 
 namespace EHwriter
 {
@@ -20,6 +21,8 @@ static async Task SendingRandomMessages()
     PerformanceCounter cpuCounter;
     
     var eventHubClient = EventHubClient.CreateFromConnectionString(connectionString, eventHubName);
+    var httpclient = new HttpListener();
+
     while (true)
     {
         try

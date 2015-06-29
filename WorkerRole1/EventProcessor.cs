@@ -5,6 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Configuration;
 using System.Threading.Tasks;
+using System.Net;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
@@ -22,6 +23,9 @@ namespace WorkerRole1
             PartitionContext partitionContext;
 
             QueueClient queue;
+
+                      
+           
 
             public EventProcessor()
             {
