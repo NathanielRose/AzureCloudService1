@@ -9,12 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerRole1", "WorkerRole1\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHwriter", "EHwriter\EHwriter.csproj", "{51DA552E-621E-4AEF-87A2-A9BCAFBBA920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonUtils", "..\..\..\..\Desktop\TrollBridge\IoTProject\CommonUtils\CommonUtils.csproj", "{86815733-716B-4674-BA88-C08813BBC0B9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{9966161C-F584-4EBF-A703-5A73D8FF7C1C}"
 	ProjectSection(SolutionItems) = preProject
 		IoTDBMerge.sql = IoTDBMerge.sql
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonUtils", "CommonUtils\CommonUtils.csproj", "{86815733-716B-4674-BA88-C08813BBC0B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

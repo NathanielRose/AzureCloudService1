@@ -31,6 +31,7 @@ namespace WorkerRole1
             {
                 
                 queue = QueueClient.CreateFromConnectionString("Endpoint=sb://iotnate.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=+XRBh06RRMu0/Ew/DSEtdOvOXm7fk9401S/AtmAMEAs=","IoTq");
+            
             }
 
             public async Task CloseAsync(PartitionContext context, CloseReason reason)
@@ -65,9 +66,7 @@ namespace WorkerRole1
                     //string data = Encoding.UTF8.GetString(eventData.GetBytes());
                     if (data != null)
                     {
-                        CloudBlockBlob inputBlob;
-                        string fileName;
-                        CloudBlockBlob outputBlob;
+                        
                         try
                         {
                             var json = JObject.Parse(data);
